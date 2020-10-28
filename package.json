@@ -4,12 +4,13 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon app.js --watch",
     "watch": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "nodemon": "^2.0.6"
   }
 }

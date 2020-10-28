@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon app.js --watch",
-    "watch": "nodemon app.js"
+    "start": "node app.js",
+    "watch": "nodemon app.js --watch"
   },
   "author": "",
   "license": "ISC",

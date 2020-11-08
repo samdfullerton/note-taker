@@ -1,20 +1,30 @@
+var note = require("../db/notes")
+var router = require("express").Router();
+var fs = require("fs");
 var path = require("path");
-var router = require ("express").Router();
-var fs =require("fs");
-const { patch } = require("./html-routes");
-    
-router.get("/api/notes",(req, res) => {
-    fs.readFile(path.join(__dirname, "../db/db.json"), "utf8", (err, data) => {
-        if (err) throw err;
-        console.log(data);
-        res.status(200).json(data)
+
+router.get("/notes", (req, res) => {
+    note.getNotes()
+    .then(notes => {
+      console.log(notes);
+      res.json(notes)
     })
+    .catch(err => res.status(500).json(err))
+});
+
+router.post("/notes", (req, res) => {
+  note.addNote(req.body)
+  .then(notes => {
+    console.log(notes);
+    res.json(notes)
+  })
+  .catch(err => res.status(500).json(err))
+  }) 
+
+router.delete("/notes/:id", (req, res) => {
+  const id = req.params.id;
+  note.deleteNote(id)
+  .then(()=> res.json({ok: true}))
+  .catch(err => res.status(500).json(err))
 })
-router.post("/api/notes", (req, res) => {
-  const newNote = req.body //this will be an object that comes from front end requeat
-    fs.write("filename", newNote, (err, data) => {
-
-
-    })
-}) 
 module.exports = router;
